@@ -1,0 +1,25 @@
+#!/bin/bash
+
+[ -z $1 ] && echo "No configuration provided" && exit 0
+[ -d $1 ] || echo "Could not find directory $1" || exit 0
+echo "Cofiguration provided from $1"
+
+echo "Your current config will be lost! Confirm? [y|n]"
+read confirm && [[ $confirm == [Yy] ]] || exit 0 || unset 'confirm'
+
+echo "Deleting existing included directories..."
+for dir in $(sed 's#~#'$HOME'#g' $1/included); do
+    [ -d $dir ] && sudo rm -rf $dir -v
+done
+
+echo "Setting up home..."
+for file in $(fd -tf -H --base-directory $1/home); do
+    mkdir -p $HOME/$(dirname $file) -v
+    cp $1/home/$file $HOME/$(dirname $file) -v
+done
+
+echo "Setting up root..."
+for file in $(fd -tf -H --base-directory $1/root); do
+    sudo mkdir -p /$(dirname $file) -v
+    sudo cp $1/root/$file /$(dirname $file) -v
+done
