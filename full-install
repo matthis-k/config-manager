@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[ -z $1 ] && echo "No configuration provided" && exit 0
+[ -d $1 ] || echo "Could not find directory $1" || exit 0
+echo "Cofiguration provided from $1"
+
+[ -f $1/prerequisites ] && $1/prerequisites
+./install-needed-packages
+./deploy-config
+[ -f $1/post-configuration ] && $1/post-configuration
