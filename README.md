@@ -26,4 +26,4 @@ In case you want to create your own configuration, you can put the following fil
 WARNING: Watch out what is in the executables/scripts unless you fully trust the source.
 NOTE: `prerequisites` and `post-configuration` is not manditory, it just helps to set your configuration up on a freshly installed system. optimally you just have to execute `full-install` and it works out of the box.
 
-[Here](https://github.com/matthis-k/config/tree/master) you can find my current configuration as an example.
+[Here](https://github.com/matthis-k/config) you can find my current configuration as an example.
