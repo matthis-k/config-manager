@@ -10,7 +10,7 @@ WARNING: Watch out what the configuration puts in here, unless you trust the sou
 Looks for `path/packages` and installes them with [paru (bin)](https://aur.archlinux.org/packages/paru-bin/). It will automatically install `paru-bin` if it is not installed on the system, feel free to change it to yay or something you prefer by simply replacing `paru` with your packagemanager of choice, change the installation command and removing the installation section for `paru`.  
 
 ## `full-install <path>`
- 1. executes `&path/prerequisites` if it exists
+ 1. executes `$path/prerequisites` if it exists
  2. executes `install-needed-packages $path`
  3. executes `deploy-config $path`
  4. executes `$path/post-configuration` if it exists
