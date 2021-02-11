@@ -1,0 +1,20 @@
+#!/bin/bash
+
+[ -z $1 ] && echo "No configuration destination provided" && exit 0
+[ -d $1 ] && echo "Directory already exists, clearing..." && rm -rf $1/home $1/root
+
+rm -rf $1/home $1/root
+
+echo "Getting included files..."
+files=()
+for include in $(sed 's#~#'$HOME'#g;' $1/included); do 
+    [ -d $include ] && files+=" $(fd --base-directory "$include" -tf -a -H)"
+    [ -f $include ] && files+=" $include"; 
+done
+
+echo "Copying files..."
+for file in $files; do
+    [[ "$file" == $HOME* ]] && file_dest="$1/home${file#$HOME}" || file_dest="$1/root${file}"
+    mkdir -p $(dirname $file_dest)
+    cp $file $(dirname $file_dest)
+done
