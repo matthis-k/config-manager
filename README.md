@@ -1,5 +1,5 @@
 # How it works
-##`get-config <path>`
+## `get-config <path>`
 Looks up what files to include in `path/included` and copies it to `path/home` if it is a subdirectory of `$HOME` and to`path/root` otherwise.  
 
 ## `deploy-config <path>`
