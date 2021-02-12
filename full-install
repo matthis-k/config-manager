@@ -12,6 +12,6 @@ cp $1/included backup
 ./get-config backup
 
 [ -f $1/prerequisites ] && echo "Execute the prerequisites? [y|n]" && read input && [[ $input == [Yy] ]] && $1/prerequisites || unset confirm
-./install-needed-packages
-./deploy-config
+./install-needed-packages $1
+./deploy-config $1
 [ -f $1/post-configuration ] && echo "Execute the post-configuration? [y|n]" && read input && [[ $input == [Yy] ]] && $1/post-configuration || unset confirm
