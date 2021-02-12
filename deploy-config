@@ -4,7 +4,7 @@
 [ -d $1 ] || echo "Could not find directory $1" || exit 0
 echo "Cofiguration provided from $1"
 
-echo "Your current config will be lost! Confirm? [y|n]"
+echo "Your current config will might get lost! Confirm? [y|n]"
 read confirm && [[ $confirm == [Yy] ]] || exit 0 || unset 'confirm'
 
 echo "Deleting existing included directories..."
