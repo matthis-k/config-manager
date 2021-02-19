@@ -10,6 +10,7 @@ read confirm && [[ $confirm == [Yy] ]] || exit 0 || unset 'confirm'
 echo "Deleting existing included directories..."
 for included in $(sed 's#~#'$HOME'#g' $1/included); do
     sudo rm -rf $included -v
+    mkdir $(dirname $included) -p
     noprefix=${included#$HOME}
     [[ $included == $HOME* ]] && ln -s -v "$1/home$noprefix" "$included" || sudo ln -s -v "$1/root$noprefix" "$included"
 done
