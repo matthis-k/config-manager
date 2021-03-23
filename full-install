@@ -4,7 +4,14 @@
 [ -d $1 ] || echo "Could not find directory $1" || exit 0
 echo "Cofiguration provided from $1"
 
-[ -f $1/prerequisites ] && $1/prerequisites
-./install-needed-packages
-./deploy-config
-[ -f $1/post-configuration ] && $1/post-configuration
+mkdir backup
+[ -f $1/prerequisites ] && cp $1/prerequisites backup
+[ -f $1/post-configuration ] && cp $1/post-configuration backup
+cp $1/packages backup
+cp $1/included backup
+./get-config backup
+
+[ -f $1/prerequisites ] && echo "Execute the prerequisites? [y|n]" && read input && [[ $input == [Yy] ]] && $1/prerequisites || unset confirm
+./install-needed-packages $1
+./deploy-config $1
+[ -f $1/post-configuration ] && echo "Execute the post-configuration? [y|n]" && read input && [[ $input == [Yy] ]] && $1/post-configuration || unset confirm
